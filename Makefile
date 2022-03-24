@@ -9,3 +9,6 @@ export:
 
 migrate:
 	poetry run python squad_game/manage.py migrate
+
+static:
+	poetry run python squad_game/manage.py collectstatic
