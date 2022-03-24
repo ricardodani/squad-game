@@ -11,4 +11,4 @@ migrate:
 	poetry run python squad_game/manage.py migrate
 
 static:
-	poetry run python squad_game/manage.py collectstatic
+	poetry run python squad_game/manage.py collectstatic --noinput

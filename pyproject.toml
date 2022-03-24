@@ -8,6 +8,7 @@ authors = ["Ricardo Dani <ricardodani@gmail.com>"]
 python = "^3.9"
 Django = "^4.0.3"
 gunicorn = "^20.1.0"
+whitenoise = "^6.0.0"
 
 [tool.poetry.dev-dependencies]
 
