@@ -44,6 +44,7 @@ class GameCategory(models.Model, DatetimeMixin):
 class GamePlayer(models.Model, DatetimeMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    is_accepted = models.BooleanField(default=False)
 
 
 class PlayerFact(models.Model, DatetimeMixin):
