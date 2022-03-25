@@ -65,8 +65,32 @@
               </form>
             </p>
           </div>
-          <div class="col-sm-12">
+          <div class="col-sm-6">
             <h2>My games</h2>
+            {% if my_games %}
+            <ul class="list-group">
+                {% for game in my_games %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ game }}
+                    <button class="btn badge bg-primary rounded-pill">Enter</button>
+
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          <div class="col-sm-6">
+            <h2>Games as guest</h2>
+            {% if guest_games %}
+            <ul class="list-group">
+                {% for game in guest_games %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ game }}
+                    <button class="btn badge bg-primary rounded-pill">Enter</button>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
           </div>
         </div>
         {% endblock %}

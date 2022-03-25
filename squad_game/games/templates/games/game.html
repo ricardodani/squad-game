@@ -9,6 +9,17 @@
     <div class="row">
         <div class="col-sm-6">
             <h3>Categories</h3>
+            {% if categories %}
+            <ul class="list-group">
+                {% for category in categories %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ category }}
+                    <button class="btn badge bg-danger rounded-pill">Remove</button>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
             <form action="/games/game/{{game.code}}/category" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -22,20 +33,16 @@
         </div>
         <div class="col-sm-6">
             <h3>Members</h3>
+            {% if players %}
             <ul class="list-group">
+                {% for player in players %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Cras justo odio
-                  <span class="badge bg-primary rounded-pill">14</span>
+                    {{ player.user }}
+                    <button class="btn badge bg-success rounded-pill">Accept</button>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Dapibus ac facilisis in
-                  <span class="badge bg-primary rounded-pill">2</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Morbi leo risus
-                  <span class="badge bg-primary rounded-pill">1</span>
-                </li>
-              </ul>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
     </div>
     <p>
