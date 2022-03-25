@@ -21,3 +21,12 @@ herokulogs:
 
 herokuopen:
 	heroku open -a squad-game
+
+herokushell:
+	heroku run -a squad-game python squad_game/manage.py shell
+
+herokudbshell:
+	heroku run -a squad-game python squad_game/manage.py dbshell
+
+herokucreatesuperuser:
+	heroku run -a squad-game python squad_game/manage.py createsuperuser
