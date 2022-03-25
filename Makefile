@@ -12,3 +12,12 @@ migrate:
 
 static:
 	poetry run python squad_game/manage.py collectstatic --noinput
+
+herokulogin:
+	heroku login
+
+herokulogs:
+	heroku logs --tail -a squad-game
+
+herokuopen:
+	heroku open -a squad-game
