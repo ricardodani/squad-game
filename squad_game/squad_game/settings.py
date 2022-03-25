@@ -77,7 +77,7 @@ import dj_database_url
 if os.environ.get("IS_HEROKU_ENV"):
     _database_url = os.environ.get("DATABASE_URL")
     print(f"Setting heroku database for {_database_url}")
-    DATABASE_CONFIG = dj_database_url.config(os.environ.get("DATABASE_URL"))
+    DATABASE_CONFIG = dj_database_url.config(default=_database_url)
     print(f'DATABASE CONFIG {DATABASE_CONFIG}')
     del _database_url
 else:
