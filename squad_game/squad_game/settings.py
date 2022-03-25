@@ -22,7 +22,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["squad-game.herokuapp.com", "localhost"]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -76,6 +75,7 @@ import dj_database_url
 
 if os.environ.get("IS_HEROKU_ENV"):
     _database_url = os.environ.get("DATABASE_URL")
+    print(f"Setting heroku database for {_database_url}")
     DATABASE_CONFIG = dj_database_url.config(default=_database_url)
     del _database_url
 else:
