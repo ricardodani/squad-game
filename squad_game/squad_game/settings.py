@@ -75,8 +75,11 @@ WSGI_APPLICATION = 'squad_game.wsgi.application'
 import dj_database_url
 
 if os.environ.get("IS_HEROKU_ENV"):
-    print("Setting heroku database")
+    _database_url = os.environ.get("DATABASE_URL")
+    print(f"Setting heroku database for {_database_url}")
     DATABASE_CONFIG = dj_database_url.config(os.environ.get("DATABASE_URL"))
+    print(f'DATABASE CONFIG {DATABASE_CONFIG}')
+    del _database_url
 else:
     print("Setting sqlite database")
     DATABASE_CONFIG = {
