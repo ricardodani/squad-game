@@ -2,14 +2,22 @@
 {% block container_content %}
 <div class="row">
     <div class="col-sm-12">
-    <p class="float-end">
-        {% if request.user == game.author %}
-        <button type="button" class="btn btn-success btn-lg">Open game</button>
-        {% else %}
-        <button type="button" class="btn btn-primary btn-lg">Join game</button>
-        {% endif %}
-    </p>
-    <h2>Game {{ game }} </h2>
+    {% if request.user == game.author %}
+        <form action="/games/game/{{game.code}}/join" method="POST">
+        {% csrf_token %}
+        <p class="float-end">
+            <button type="button" class="btn btn-success btn-lg">Open game</button>
+        </p>
+        </form>
+    {% elif not is_guest %}
+        <form action="/games/game/{{game.code}}/join" method="POST">
+        {% csrf_token %}
+        <p class="float-end">
+            <button type="submit" class ="btn btn-primary btn-lg">Enter as guest</button>
+        </p>
+        </form>
+    {% endif %}
+    <h2>{{ game.title }} </h2>
     <small>{{ game.get_status_display }}</small>
     <h6>Author: {{ game.author }}</h6>
     <h6>Creation: {{ game.created_at }}</h5>
@@ -27,7 +35,7 @@
                 {% endfor %}
             </ul>
             {% endif %}
-
+            {% if not is_guest %}
             <form action="/games/game/{{game.code}}/category" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -38,6 +46,7 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
         </div>
         <div class="col-sm-6">
             <h3>Members</h3>

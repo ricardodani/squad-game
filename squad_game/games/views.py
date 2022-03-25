@@ -52,7 +52,7 @@ def create_category(request, code):
 
 @login_required
 def join_game(request):
-    game_code = request.GET.get("code")
+    game_code = request.GET.get("name")
     try:
         game = Game.objects.get(code=game_code)
     except Game.DoesNotExist:
@@ -60,6 +60,22 @@ def join_game(request):
         return redirect('/')
     else:
         return redirect(f'/games/game/{game.code}')
+
+
+@login_required
+def guest_join_game(request, code):
+    try:
+        game = Game.objects.get(code=code)
+    except Game.DoesNotExist:
+        messages.error(request, 'Game does not exist')
+        return redirect('/')
+    if request.method == 'POST':
+        GamePlayer.objects.create(
+            user=request.user,
+            game=game
+        )
+        messages.success(request, 'Player entered in game as guest')
+    return redirect(f'/games/game/{game.code}')
 
 
 @login_required
@@ -74,4 +90,5 @@ def detail_game(request, code):
             'game': game,
             'categories': game.categories.all(),
             'players': game.players.all(),
+            'is_guest': game.players.filter(user=request.user).exists()
         })
