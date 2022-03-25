@@ -18,9 +18,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-md-auto">
+              {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a target="_blank" rel="noopener" class="nav-link" href="https://twitter.com/bootswatch"><span class="fa-solid fa-user"></span> Entrar</a>
+             <button class="btn">Welcome, <strong>{{ request.user }}</strong></button> 
+              </li>
+            <li class="nav-item">
+              <form action="/accounts/logout/" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn" ><span class="fa-solid fa-right-from-bracket"></span> Logout</button>
+              </form>
             </li>
+              {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/github/login/"><span class="fa-solid fa-user"></span> Join/Login</a>
+              </li>
+              {% endif %}
           </ul>
         </div>
       </div>
