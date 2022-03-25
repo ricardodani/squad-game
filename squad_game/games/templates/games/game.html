@@ -1,0 +1,45 @@
+{% extends "games/base.html" %}
+{% block container_content %}
+<div class="row">
+    <div class="col-sm-12">
+    <h2>Game {{ game }} ({{ game.get_status_display }})</h2>
+    <h6>Author: {{ game.author }}</h6>
+    <h6>Creation: {{ game.created_at }}</h5>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Categories</h3>
+            <form action="/games/game/{{game.code}}/category" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="gametitle" class="form-label mt-4">Category</label>
+                    <div class="input-group">
+                        <input name="title" type="text" class="form-control" id="gametitle" aria-describedby="emailHelp" placeholder="Enter a new category">
+                        <button class="btn btn-success" type="submit">Create category</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <h3>Members</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Cras justo odio
+                  <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Dapibus ac facilisis in
+                  <span class="badge bg-primary rounded-pill">2</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Morbi leo risus
+                  <span class="badge bg-primary rounded-pill">1</span>
+                </li>
+              </ul>
+        </div>
+    </div>
+    <p>
+    </p>
+    </div>
+</div>
+{% endblock %}

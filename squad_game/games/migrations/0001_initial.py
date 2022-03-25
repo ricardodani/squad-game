@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(choices=[('draft', 'Draft'), ('open', 'Open'), ('running', 'Running'), ('finished', 'Finished')], default='draft', max_length=8)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
-            bases=(models.Model, games.models.DatetimeMixin),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='GameCategory',
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=64)),
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='games.game')),
             ],
-            bases=(models.Model, games.models.DatetimeMixin),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='GamePlayer',
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='games.game')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
-            bases=(models.Model, games.models.DatetimeMixin),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='GameRound',
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('round', models.PositiveIntegerField()),
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='games.game')),
             ],
-            bases=(models.Model, games.models.DatetimeMixin),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='PlayerRoundScore',
@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
                 ('answer_3', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='rounds_as_3', to='games.gameplayer')),
                 ('game_round', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='games.gameround')),
             ],
-            bases=(models.Model, games.models.DatetimeMixin),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='PlayerFact',
@@ -75,7 +75,7 @@ class Migration(migrations.Migration):
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='games.game')),
                 ('player', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='games.gameplayer')),
             ],
-            bases=(models.Model, games.models.DatetimeMixin),
+            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='gameround',

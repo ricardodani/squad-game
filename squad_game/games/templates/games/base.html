@@ -12,7 +12,7 @@
   <body>
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div class="container">
-        <a href="../" class="navbar-brand"><strong>Squad Game</strong> - <i>Do we know each other?</i></a>
+        <a href="../" class="navbar-brand"><strong class="text-warning"><i class="fa-solid fa-bugs"></i> Squad Game</strong> - <i>Do we know each other?</i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,6 +41,14 @@
     {% block container %}
     <div class="container">
       <div class="page-header" id="banner">
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+          <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
+        {% block container_content %}
         <div class="row">
           <div class="col-sm-6">
             <h2>Create a new game</h2>
@@ -49,15 +57,19 @@
           </div>
           <div class="col-sm-6">
             <h2>Join existent game</h2>
-            <p class="lead">Time to create your first game, but first you need to be logged in!</p>
+            <p class="lead">Or you can join a pre created game! Just enter the 6 hexadecimal chars representing the game code.</p>
             <p>
-              <form class="d-flex">
-                <input class="form-control me-sm-2" type="text" placeholder="Insert game code">
+              <form class="d-flex" action="{% url 'join-game' %}" method="GET">
+                <input class="form-control-lg me-sm-2" type="text" placeholder="XXXXXX" maxlength=6 minlength=6 name="name">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Join</button>
               </form>
             </p>
           </div>
+          <div class="col-sm-12">
+            <h2>My games</h2>
+          </div>
         </div>
+        {% endblock %}
       </div>
       {% endblock %}
 

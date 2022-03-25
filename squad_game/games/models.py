@@ -9,12 +9,7 @@ def generate_random_code():
     return str(uuid.uuid4())[:CODE_SIZE].upper()
 
 
-class DatetimeMixin:
-    updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
-class Game(models.Model, DatetimeMixin):
+class Game(models.Model):
     DRAFT = 'draft'
     OPEN = 'open'
     RUNNING = 'running'
@@ -31,41 +26,53 @@ class Game(models.Model, DatetimeMixin):
     code = models.CharField(max_length=CODE_SIZE, db_index=True, unique=True, default=generate_random_code)
     status = models.CharField(max_length=8, choices=STATUS_CHOICES, default=DRAFT)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"#{self.code} - {self.title}"
 
 
-class GameCategory(models.Model, DatetimeMixin):
+class GameCategory(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
-class GamePlayer(models.Model, DatetimeMixin):
+class GamePlayer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     is_accepted = models.BooleanField(default=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
-class PlayerFact(models.Model, DatetimeMixin):
+class PlayerFact(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     player = models.ForeignKey(GamePlayer, on_delete=models.CASCADE)
     category = models.ForeignKey(GameCategory, on_delete=models.CASCADE)
     fact = models.CharField(max_length=64)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
-class GameRound(models.Model, DatetimeMixin):
+class GameRound(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     round = models.PositiveIntegerField()
     player_fact = models.ForeignKey(PlayerFact, on_delete=models.CASCADE)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
-class PlayerRoundScore(models.Model, DatetimeMixin):
+class PlayerRoundScore(models.Model):
     game_round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
     score = models.PositiveIntegerField(default=0)
     answer_1 = models.ForeignKey(GamePlayer, on_delete=models.CASCADE, null=True, related_name='rounds_as_1')
     answer_2 = models.ForeignKey(GamePlayer, on_delete=models.CASCADE, null=True, related_name='rounds_as_2')
     answer_3 = models.ForeignKey(GamePlayer, on_delete=models.CASCADE, null=True, related_name='rounds_as_3')
     is_voted = models.BooleanField(default=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
