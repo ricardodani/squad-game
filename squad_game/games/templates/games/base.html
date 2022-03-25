@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Squad Game - by @ricardodani</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  <body>
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+      <div class="container">
+        <a href="../" class="navbar-brand"><strong>Squad Game</strong> - <i>Do we know each other?</i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-md-auto">
+            <li class="nav-item">
+              <a target="_blank" rel="noopener" class="nav-link" href="https://twitter.com/bootswatch"><span class="fa-solid fa-user"></span> Entrar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {% block container %}
+    <div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Create a new game</h2>
+            <p class="lead">Want to create a new game? You will be the admin it, determining rules and accepting members.</p>
+            <p><button type="button" class="btn btn-success">Create a game</button></p>
+          </div>
+          <div class="col-sm-6">
+            <h2>Join existent game</h2>
+            <p class="lead">Time to create your first game, but first you need to be logged in! bla</p>
+            <p>
+              <form class="d-flex">
+                <input class="form-control me-sm-2" type="text" placeholder="Insert game code">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Join</button>
+              </form>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+
+      <footer id="footer">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="list-unstyled">
+              <li><a href="https://github.com/ricardodani/squad-game/">GitHub project page</a></li>
+            </ul>
+            <p>Made by <a href="https://github.com/ricardodani">Ricardo Dani</a>.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>
+
+

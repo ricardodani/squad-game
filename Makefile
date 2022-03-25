@@ -1,7 +1,7 @@
 build:
 	poetry install
 
-run:
+run: static
 	poetry run python squad_game/manage.py runserver
 
 export:
