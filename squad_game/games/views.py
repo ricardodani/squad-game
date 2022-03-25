@@ -7,12 +7,16 @@ def template(request):
     return render(request, 'games/template.html')
 
 def index(request):
-    return render(request, 'games/base.html', {
+    if request.user.is_authenticated:
+        context = {
         'my_games': Game.objects.filter(author=request.user),
         'guest_games': Game.objects.filter(
             players__user=request.user).exclude(author=request.user
         )
-    })
+    }
+    else:
+        context = {}
+    return render(request, 'games/base.html', context)
 
 @login_required
 def create_game(request):

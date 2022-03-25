@@ -65,6 +65,7 @@
               </form>
             </p>
           </div>
+          {% if request.user.is_authenticated %}
           <div class="col-sm-6">
             <h2>My games</h2>
             {% if my_games %}
@@ -92,6 +93,7 @@
             </ul>
             {% endif %}
           </div>
+          {% endif %}
         </div>
         {% endblock %}
       </div>
